@@ -4,7 +4,7 @@
     <category id="general" label="30068" help="">
       <group id="1" label="">
         <!-- compress backups -->
-        <setting id="show_all" type="boolean" label="30069" help="30070">
+        <setting id="show_all" type="boolean" label="30005">
           <level>0</level>
           <default>false</default>
           <control type="toggle" />
