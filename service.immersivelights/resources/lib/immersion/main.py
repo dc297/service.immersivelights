@@ -1,6 +1,9 @@
 import xbmc
-import datetime
-from . import utils
+import xbmcaddon
+from resources.lib.immersion.gui import GuiHandler
+from resources.lib.immersion.logger import Logger
+from resources.lib.immersion.monitor import Monitor
+from resources.lib.immersion.settings import SettingsManager
 
 class ImmersionService:
     last_check = -1
@@ -10,19 +13,14 @@ class ImmersionService:
         pass
 
     def runProgram(self):
-        monitor = xbmc.Monitor()
-        startup = True
+        addon = xbmcaddon.Addon()
+        logger = Logger(addon.getAddonInfo("name"))
+        settings_manager = SettingsManager(addon.getSettings(), logger)
+        player = xbmc.Player()
+        output_handler = GuiHandler(addon, settings_manager)
+        monitor = Monitor(settings_manager, player, output_handler, logger)
+        monitor.main_loop()
 
-        # run until abort requested
-        while(True):
-
-            if startup:
-                utils.showNotification('Immersive lights starting up')
-                pass
-
-            startup = False
-
-            # calculate the sleep time (next minute)
-            currentSec = datetime.datetime.now()
-            if(monitor.waitForAbort(60 - currentSec.second)):
+        while not monitor.abortRequested():
+            if monitor.waitForAbort(10):
                 break

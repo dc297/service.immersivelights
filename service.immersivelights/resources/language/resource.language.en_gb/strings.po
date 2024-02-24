@@ -42,3 +42,59 @@ msgstr ""
 msgctxt "#30068"
 msgid "General"
 msgstr ""
+
+msgctxt "#32002"
+msgid "Enable immersion?"
+msgstr ""
+
+msgctxt "#32001"
+msgid "General"
+msgstr "General"
+
+msgctxt "#32002"
+msgid "Enable addon (Grabbing)"
+msgstr "Enable addon (Grabbing)"
+
+msgctxt "#32003"
+msgid "Home assistant hostname or IP-address"
+msgstr "Home assistant hostname or IP-address"
+
+msgctxt "#32004"
+msgid "Home assistant port"
+msgstr "Home assistant port"
+
+msgctxt "#32005"
+msgid "Home assistant entity id"
+msgstr "Home assistant entity id"
+
+msgctxt "#32006"
+msgid "Reconnect timeout (s)"
+msgstr "Reconnect timeout (s)"
+
+msgctxt "#32007"
+msgid "Enable when on screensaver"
+msgstr "Enable when on screensaver"
+
+msgctxt "#32008"
+msgid "Grabber picture width (pixel)"
+msgstr "Grabber picture width (pixel)"
+
+msgctxt "#32010"
+msgid "Frame rate (fps)"
+msgstr "Frame rate (fps)"
+
+msgctxt "#32011"
+msgid "Home assistant token"
+msgstr "Home assistant token"
+
+msgctxt "#32100"
+msgid "Error: Unable to connect to Hyperion. Wrong hostname or IP-address?"
+msgstr ""
+
+msgctxt "#32101"
+msgid "Error: Unable to send image to Hyperion. Wrong PROTO-port?"
+msgstr ""
+
+msgctxt "#32102"
+msgid "ATTENTION: Higher the values below may lead to performance issues"
+msgstr ""

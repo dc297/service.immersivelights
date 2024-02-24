@@ -1,5 +1,4 @@
-from resources.lib.immersion import utils, ImmersionService
+from resources.lib.immersion import ImmersionService
 
 # run the program
-utils.log("Cron for Kodi service starting....")
 ImmersionService().runProgram()
