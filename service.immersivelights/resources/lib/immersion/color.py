@@ -10,10 +10,10 @@ class Color:
             current_rgb += difference
         return current_rgb
 
-    def calc_next_color(target_color, current_color, difference):
+    def calc_next_color(self, target_color, current_color, difference):
         curr_color = []
         for i in range(0, len(target_color)):
-            curr_color.append(calc_next_rgb(target_color[i], current_color[i], difference))
+            curr_color.append(self.calc_next_rgb(target_color[i], current_color[i], difference))
         return curr_color
 
     def clamp(rgb, low, high):
@@ -44,10 +44,10 @@ class Color:
         hls = colorsys.rgb_to_hls(color[0] / 255, color[1] / 255, color[2] / 255)
         return int(hls[1] * 255)
 
-    def calculate_brightness_gradient(target, current, steps):
-        target_brightness = rgb_to_brightness(target)
-        current_brightness = rgb_to_brightness(current)
-        return lerp(target_brightness, current_brightness, steps)
+    def calculate_brightness_gradient(self, target, current, steps):
+        target_brightness = self.rgb_to_brightness(target)
+        current_brightness = self.rgb_to_brightness(current)
+        return self.lerp(target_brightness, current_brightness, steps)
 
     def get_saturated_color(color):
         """Increase the saturation of the current color."""
@@ -55,15 +55,15 @@ class Color:
         rgb_saturated = colorsys.hls_to_rgb(hls[0], 0.5, hls[1])
         return [int(rgb_saturated[0] * 255), int(rgb_saturated[1] * 255), int(rgb_saturated[2] * 255)]
 
-    def calculate_gradient(target, current, saturated, max_steps):
+    def calculate_gradient(self, target, current, saturated, max_steps):
         target = target
         current = current
-        steps = calculate_steps(target, current, max_steps)
+        steps = self.calculate_steps(target, current, max_steps)
         if steps <= 1:
-            return [target], [rgb_to_brightness(target)]
-        color_gradient = lerp_vector(target, current, steps)
-        color_gradient_saturated = [get_saturated_color(col) for col in color_gradient] if saturated else color_gradient
-        brightness_gradient = calculate_brightness_gradient(target, current, steps)
+            return [target], [self.rgb_to_brightness(target)]
+        color_gradient = self.lerp_vector(target, current, steps)
+        color_gradient_saturated = [self.get_saturated_color(col) for col in color_gradient] if saturated else color_gradient
+        brightness_gradient = self.calculate_brightness_gradient(target, current, steps)
         return color_gradient_saturated, brightness_gradient
 
     def to_terminal_color(rgb_color: list):
