@@ -13,7 +13,7 @@ class LightController:
             "Authorization": "Bearer " + self.settings.token,
             "content-type": "application/json",
         }
-        pass
+        self.last_color = None
     
     def set_color(
         self, color_brightness

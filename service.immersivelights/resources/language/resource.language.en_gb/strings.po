@@ -87,6 +87,10 @@ msgctxt "#32011"
 msgid "Home assistant token"
 msgstr "Home assistant token"
 
+msgctxt "#32012"
+msgid "Use saturated colors"
+msgstr "Indicates whether to use saturated colors or not"
+
 msgctxt "#32100"
 msgid "Error: Unable to connect to Hyperion. Wrong hostname or IP-address?"
 msgstr ""

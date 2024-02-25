@@ -145,7 +145,7 @@ class Monitor(xbmc.Monitor):
 
         try:
             # send image to hyperion
-            self._light_controller.set_color(ImageUtils.extract_color(False, image))
+            self._light_controller.set_color(ImageUtils.extract_color(self.settings.saturated_colors, image))
         except Exception:
             # unable to send image. notify and go to the error state
             self.output_handler.notify_label(32101)
