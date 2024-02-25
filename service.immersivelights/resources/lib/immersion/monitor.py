@@ -54,6 +54,7 @@ class Monitor(xbmc.Monitor):
         self.show_error_message = True
         self._light_controller: LightController
         self._capture: xbmc.RenderCapture
+        self.imageUtils = ImageUtils(settings)
 
     def onSettingsChanged(self) -> None:
         self.settings.read_settings()
@@ -145,7 +146,7 @@ class Monitor(xbmc.Monitor):
 
         try:
             # send image to hyperion
-            self._light_controller.set_color(ImageUtils.extract_color(self.settings.saturated_colors, image))
+            self._light_controller.set_color(self.imageUtils.extract_color(image))
         except Exception:
             # unable to send image. notify and go to the error state
             self.output_handler.notify_label(32101)

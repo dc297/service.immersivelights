@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.immersivelights"
-    name="Immersive lights" version="0.0.8" provider-name="dc297">
+    name="Immersive lights" version="0.0.13" provider-name="dc297">
   <requires>
     <import addon="xbmc.addon"  version="20.0.0"/>
     <import addon="xbmc.python" version="3.0.1"/>

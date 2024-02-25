@@ -91,6 +91,10 @@ msgctxt "#32012"
 msgid "Use saturated colors"
 msgstr "Indicates whether to use saturated colors or not"
 
+msgctxt "#32013"
+msgid "Saturation (0 to 1)"
+msgstr "Use saturated colors should be enabled to use this option"
+
 msgctxt "#32100"
 msgid "Error: Unable to connect to Hyperion. Wrong hostname or IP-address?"
 msgstr ""

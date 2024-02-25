@@ -49,6 +49,7 @@ class SettingsManager:
         self.token: str
         self.entity_name: str
         self.saturated_colors: bool
+        self.saturation: float
         self.read_settings()
 
     def read_settings(self) -> None:
@@ -66,6 +67,7 @@ class SettingsManager:
         self.token = settings.getString("hass_token")
         self.entity_name = settings.getString("hass_entity")
         self.saturated_colors = settings.getBool("saturated_colors")
+        self.saturation = settings.getNumber("saturation")
         self._log_settings()
 
     def _log_settings(self) -> None:
@@ -80,3 +82,4 @@ class SettingsManager:
         log(f"capture width:          {self.capture_width}")
         log(f"framerate:              {self.framerate}")
         log(f"saturated colors:       {self.saturated_colors}")
+        log(f"saturation:             {self.saturation}")

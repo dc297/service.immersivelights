@@ -19,6 +19,10 @@ class LightController:
         self, color_brightness
     ) -> None:
         (color_rgb, brightness) = color_brightness
+        if self.last_color == color_brightness:
+            self._logger.debug('skipping setting color to ' + Color.to_terminal_color(color_rgb) + ' brightness: ' + str(brightness))
+            return
+
         self._logger.info('setting color to ' + Color.to_terminal_color(color_rgb) + ' brightness: ' + str(brightness))
         try:
             data = {
@@ -30,7 +34,9 @@ class LightController:
 
             response = requests.request('post', self.url, headers=self.headers, data=json.dumps(data))
             if response.status_code != 200:
-                print(response.text)
+                self._logger.error('Error response from Hass: ' + response.text)
+            else:
+                self.last_color = color_brightness
         except:
             self._logger.error('failed to update light color')
             pass

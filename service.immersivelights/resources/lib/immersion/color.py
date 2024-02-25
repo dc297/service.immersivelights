@@ -1,6 +1,10 @@
 import colorsys
+from resources.lib.immersion.settings import SettingsManager
 
 class Color:
+    def __init__(self, settings: SettingsManager):
+        self.settings = settings
+
     def calc_next_rgb(target_rgb, current_rgb, difference):
         if abs(current_rgb - target_rgb) < difference:
             return target_rgb
@@ -49,10 +53,10 @@ class Color:
         current_brightness = self.rgb_to_brightness(current)
         return self.lerp(target_brightness, current_brightness, steps)
 
-    def get_saturated_color(color):
+    def get_saturated_color(self, color):
         """Increase the saturation of the current color."""
         hls = colorsys.rgb_to_hls(color[0] / 255, color[1] / 255, color[2] / 255)
-        rgb_saturated = colorsys.hls_to_rgb(hls[0], 0.5, hls[1])
+        rgb_saturated = colorsys.hls_to_rgb(hls[0], self.settings.saturation, hls[1])
         return [int(rgb_saturated[0] * 255), int(rgb_saturated[1] * 255), int(rgb_saturated[2] * 255)]
 
     def calculate_gradient(self, target, current, saturated, max_steps):
