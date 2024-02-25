@@ -14,14 +14,15 @@ class LightController:
             "content-type": "application/json",
         }
         self.last_color = None
-    
+
     def set_color(
-        self, color_brightness
+        self, color_rgb
     ) -> None:
-        (color_rgb, brightness) = color_brightness
-        if self.last_color == color_brightness:
-            self._logger.debug('skipping setting color to ' + Color.to_terminal_color(color_rgb) + ' brightness: ' + str(brightness))
+        if self.last_color == color_rgb:
+            self._logger.debug('skipping setting color to ' + Color.to_terminal_color(color_rgb))
             return
+        
+        brightness = Color.rgb_to_brightness(color_rgb)
 
         self._logger.info('setting color to ' + Color.to_terminal_color(color_rgb) + ' brightness: ' + str(brightness))
         try:
@@ -36,7 +37,7 @@ class LightController:
             if response.status_code != 200:
                 self._logger.error('Error response from Hass: ' + response.text)
             else:
-                self.last_color = color_brightness
+                self.last_color = color_rgb
         except:
             self._logger.error('failed to update light color')
             pass

@@ -9,11 +9,10 @@ class ImageUtils:
         self.saturated = settings.saturated_colors
 
     def extract_color(self, image: Image):
-        bbox = image.convert("RGB").getbbox()
+        bbox = image.getbbox()
         if bbox:
             image = image.crop(bbox)
         
         palette = image.quantize(colors=1).getpalette()
         dominant_color = [palette[i:i + 3] for i in range(0, 3, 3)][0]
-        result_color = dominant_color if not self.saturated else self.color.get_saturated_color(dominant_color)
-        return (result_color, Color.rgb_to_brightness(result_color))
+        return dominant_color if not self.saturated else self.color.get_saturated_color(dominant_color)

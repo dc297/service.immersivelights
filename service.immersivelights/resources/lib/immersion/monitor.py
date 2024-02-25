@@ -145,7 +145,7 @@ class Monitor(xbmc.Monitor):
         image = Image.frombytes("RGB", capture_size, bytes(cap_image), "raw", "BGRX")
 
         try:
-            # send image to hyperion
+            # send image to hass
             self._light_controller.set_color(self.imageUtils.extract_color(image))
         except Exception:
             # unable to send image. notify and go to the error state
