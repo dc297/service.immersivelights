@@ -1,26 +1,3 @@
-"""
-Kodi video capturer for Hyperion.
-
-Copyright (c) 2013-2023 Hyperion Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-"""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -51,6 +28,7 @@ class SettingsManager:
         self.mqtt_topic: str
         self.saturated_colors: bool
         self.saturation: float
+        self.min_distance: float
         self.read_settings()
 
     def read_settings(self) -> None:
@@ -70,6 +48,7 @@ class SettingsManager:
         self.mqtt_topic = settings.getString("hass_mqtt_topic")
         self.saturated_colors = settings.getBool("saturated_colors")
         self.saturation = settings.getNumber("saturation")
+        self.min_distance = settings.getNumber("min_distance")
         self._log_settings()
 
     def _log_settings(self) -> None:
@@ -86,3 +65,4 @@ class SettingsManager:
         log(f"framerate:              {self.framerate}")
         log(f"saturated colors:       {self.saturated_colors}")
         log(f"saturation:             {self.saturation}")
+        log(f"min_distance:           {self.min_distance}")

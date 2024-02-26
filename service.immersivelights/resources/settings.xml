@@ -3,7 +3,8 @@
 	<category label="32001">
 		<setting id="enable" type="bool" label="32002" default="true" />
 		<setting id="saturated_colors" type="bool" label="32012" default="true" />
-		<setting id="saturation" type="slider" range="0.01,0.01,1" label="32013"  default="0.5" option="float" enable="eq(-1, true)" />
+		<setting id="saturation" type="slider" range="0.01,0.01,1" label="32014"  default="0.5" option="float" enable="eq(-1, true)" />
+		<setting id="min_distance" type="slider" range="0.01,0.01,1" label="32015"  default="0.05" option="float" />
 		<setting id="screensaver_enable" type="bool" label="32007" default="false" subsetting="true" visible="eq(-1,true)" enable="eq(-1,true)"/>
 		<setting id="hass_ip" type="text" label="32003" default="localhost" />
 		<setting id="hass_port" type="number" label="32004" default="8123" />

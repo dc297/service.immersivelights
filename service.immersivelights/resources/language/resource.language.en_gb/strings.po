@@ -95,16 +95,20 @@ msgctxt "#32013"
 msgid "Home assistant MQTT pwd"
 msgstr "Home assistant MQTT pwd"
 
-msgctxt "#32013"
+msgctxt "#32014"
 msgid "Saturation (0 to 1)"
 msgstr "Use saturated colors should be enabled to use this option"
 
+msgctxt "#32015"
+msgid "Minimum difference between colors to trigger a change"
+msgstr "Minimum difference between colors to trigger a change"
+
 msgctxt "#32100"
-msgid "Error: Unable to connect to Hyperion. Wrong hostname or IP-address?"
+msgid "Error: Unable to connect to hass. Wrong hostname or IP-address?"
 msgstr ""
 
 msgctxt "#32101"
-msgid "Error: Unable to send image to Hyperion. Wrong PROTO-port?"
+msgid "Error: Unable to send color to hass"
 msgstr ""
 
 msgctxt "#32102"

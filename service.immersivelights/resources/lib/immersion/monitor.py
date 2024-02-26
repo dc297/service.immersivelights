@@ -133,7 +133,6 @@ class Monitor(xbmc.Monitor):
             del self._light_controller
             return self.disconnected_state
 
-        start = time.time()
         capture_size, expected_capture_size = self.get_capture_size()
         self._capture.capture(*capture_size)
         cap_image = self._capture.getImage(self.settings.sleep_time)
@@ -145,18 +144,16 @@ class Monitor(xbmc.Monitor):
             )
             xbmc.sleep(250)
             return self.connected_state
-        self._logger.info('Finished capture, took: ' + str(time.time() - start) + ' seconds')
         # v17+ use BGRA format, converting to RGB
         image = Image.frombytes("RGB", capture_size, bytes(cap_image), "raw", "BGRX")
         try:
             # send image to hass
             extracted_color = self.imageUtils.extract_color(image)
-            self._logger.info('Finished color extraction, took: ' + str(time.time() - start) + ' seconds')
             self._light_controller.set_color(extracted_color)
-        except Exception:
+        except Exception as e:
+            self._logger.error('Couldnt set color. error: ' + str(e))
             # unable to send image. notify and go to the error state
             self.output_handler.notify_label(32101)
             return self.error_state
 
-        self._logger.info('Finished setting color, took: ' + str(time.time() - start) + ' seconds')
         return self.connected_state

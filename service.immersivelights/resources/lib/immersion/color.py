@@ -1,4 +1,4 @@
-import colorsys
+import colorsys, math
 from resources.lib.immersion.settings import SettingsManager
 
 class Color:
@@ -72,3 +72,24 @@ class Color:
 
     def to_terminal_color(rgb_color: list):
         return '\x1b[38;2;' + ';'.join([str(i) for i in rgb_color]) + 'm' + str(rgb_color) + '\x1b[0m'
+    
+    def close_enough(rgb1, rgb2, min_difference):
+        if rgb1 is None or rgb2 is None:
+            return False
+
+        hls1 = colorsys.rgb_to_hls(rgb1[0] / 255, rgb1[1] / 255, rgb1[2] / 255)
+        hls2 = colorsys.rgb_to_hls(rgb2[0] / 255, rgb2[1] / 255, rgb2[2] / 255)
+
+        # calculate the distance between two points in the hls cylinder
+        distance = math.dist(hls1, hls2)
+
+        # the maximum distance possible in the hls cylinder is sqrt(5) 
+        # which is distance between two points on a cylinder is the length 
+        # of the hypotenuse of the right-angled triangle formed by the 
+        # cylinder's diameter (in this case 2 since s (radius) varies from range 0 to 1) 
+        # and height (in this case 1 since l (height) varies from range 0 to 1). So, the 
+        # max distance can be sqrt(2 ^ 2 + 1 ^ 2).
+        max_distance = math.sqrt(5)
+
+        
+        return min_difference > (distance/max_distance)
