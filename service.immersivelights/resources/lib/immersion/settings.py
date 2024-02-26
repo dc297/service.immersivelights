@@ -46,8 +46,9 @@ class SettingsManager:
         self.capture_width: int
         self.framerate: int
         self.sleep_time: int
-        self.token: str
-        self.entity_name: str
+        self.mqtt_user: str
+        self.mqtt_pwd: str
+        self.mqtt_topic: str
         self.saturated_colors: bool
         self.saturation: float
         self.read_settings()
@@ -64,8 +65,9 @@ class SettingsManager:
         self.address = settings.getString("hass_ip")
         self.port = settings.getInt("hass_port")
         self.rev += 1
-        self.token = settings.getString("hass_token")
-        self.entity_name = settings.getString("hass_entity")
+        self.mqtt_user = settings.getString("hass_mqtt_user")
+        self.mqtt_pwd = settings.getString("hass_mqtt_pwd")
+        self.mqtt_topic = settings.getString("hass_mqtt_topic")
         self.saturated_colors = settings.getBool("saturated_colors")
         self.saturation = settings.getNumber("saturation")
         self._log_settings()
@@ -75,7 +77,8 @@ class SettingsManager:
         log("Settings updated!")
         log(f"Hass ip:                {self.address}")
         log(f"Hass port:              {self.port}")
-        log(f"Hass entity name:       {self.entity_name}")
+        log(f"Hass MQTT topic:        {self.mqtt_topic}")
+        log(f"Hass MQTT user:         {self.mqtt_user}")
         log(f"enabled:                {self.enable}")
         log(f"enabled on screensaver: {self.enable_screensaver}")
         log(f"timeout:                {self.timeout}")

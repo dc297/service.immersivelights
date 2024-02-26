@@ -64,8 +64,8 @@ msgid "Home assistant port"
 msgstr "Home assistant port"
 
 msgctxt "#32005"
-msgid "Home assistant entity id"
-msgstr "Home assistant entity id"
+msgid "Home assistant MQTT topic"
+msgstr "Home assistant MQTT topic"
 
 msgctxt "#32006"
 msgid "Reconnect timeout (s)"
@@ -84,12 +84,16 @@ msgid "Frame rate (fps)"
 msgstr "Frame rate (fps)"
 
 msgctxt "#32011"
-msgid "Home assistant token"
-msgstr "Home assistant token"
+msgid "Home assistant MQTT user"
+msgstr "Home assistant MQTT user"
 
 msgctxt "#32012"
 msgid "Use saturated colors"
 msgstr "Indicates whether to use saturated colors or not"
+
+msgctxt "#32013"
+msgid "Home assistant MQTT pwd"
+msgstr "Home assistant MQTT pwd"
 
 msgctxt "#32013"
 msgid "Saturation (0 to 1)"

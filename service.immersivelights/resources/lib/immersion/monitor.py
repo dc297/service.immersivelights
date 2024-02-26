@@ -32,6 +32,9 @@ from resources.lib.immersion.gui import GuiHandler
 from resources.lib.immersion.light_controller import LightController
 from resources.lib.immersion.image import ImageUtils
 from typing import Tuple
+
+import time
+
 State = Callable[[], "State"]
 
 
@@ -95,8 +98,9 @@ class Monitor(xbmc.Monitor):
         try:
             self.connect()
             return self.connected_state
-        except Exception:
+        except Exception as e:
             self.notify_error(32100)
+            self._logger.error(str(e))
             return self.error_state
 
     def error_state(self) -> State:
@@ -111,7 +115,7 @@ class Monitor(xbmc.Monitor):
     def connect(self) -> None:
         settings = self.settings
         self._logger.info(
-            f"Establishing connection to hyperion at {settings.address}:{settings.port}"
+            f"Establishing connection to home assistant at {settings.address}:{settings.port}"
         )
         self._light_controller = LightController(settings, self._logger)
         self._capture = xbmc.RenderCapture()
@@ -129,6 +133,7 @@ class Monitor(xbmc.Monitor):
             del self._light_controller
             return self.disconnected_state
 
+        start = time.time()
         capture_size, expected_capture_size = self.get_capture_size()
         self._capture.capture(*capture_size)
         cap_image = self._capture.getImage(self.settings.sleep_time)
@@ -140,16 +145,18 @@ class Monitor(xbmc.Monitor):
             )
             xbmc.sleep(250)
             return self.connected_state
-
+        self._logger.info('Finished capture, took: ' + str(time.time() - start) + ' seconds')
         # v17+ use BGRA format, converting to RGB
         image = Image.frombytes("RGB", capture_size, bytes(cap_image), "raw", "BGRX")
-
         try:
             # send image to hass
-            self._light_controller.set_color(self.imageUtils.extract_color(image))
+            extracted_color = self.imageUtils.extract_color(image)
+            self._logger.info('Finished color extraction, took: ' + str(time.time() - start) + ' seconds')
+            self._light_controller.set_color(extracted_color)
         except Exception:
             # unable to send image. notify and go to the error state
             self.output_handler.notify_label(32101)
             return self.error_state
 
+        self._logger.info('Finished setting color, took: ' + str(time.time() - start) + ' seconds')
         return self.connected_state

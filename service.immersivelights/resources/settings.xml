@@ -3,12 +3,13 @@
 	<category label="32001">
 		<setting id="enable" type="bool" label="32002" default="true" />
 		<setting id="saturated_colors" type="bool" label="32012" default="true" />
-		<setting id="saturation" type="slider" range="0.01,0.01,1" label="32013"  default="0.5" option="float" />
+		<setting id="saturation" type="slider" range="0.01,0.01,1" label="32013"  default="0.5" option="float" enable="eq(-1, true)" />
 		<setting id="screensaver_enable" type="bool" label="32007" default="false" subsetting="true" visible="eq(-1,true)" enable="eq(-1,true)"/>
 		<setting id="hass_ip" type="text" label="32003" default="localhost" />
 		<setting id="hass_port" type="number" label="32004" default="8123" />
-		<setting id="hass_entity" type="text" label="32005" />
-    	<setting id="hass_token" type="text" label="32011" />
+		<setting id="hass_mqtt_topic" type="text" label="32005" />
+    	<setting id="hass_mqtt_user" type="text" label="32011" />
+		<setting id="hass_mqtt_pwd" type="text" label="32013" option="hidden" enable="!eq(-1,)" />
 		<setting id="reconnect_timeout" type="number" label="32006" default="30" />
 		<setting type="sep"/>
 		<setting label="32102" type="lsep"/>
